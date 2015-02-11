@@ -18,6 +18,7 @@ class PagesController extends BaseController {
 
         return View::make('hello')->with('name', $name);
     }
+    
 
     public function about() {
         $name = "Gosho";
