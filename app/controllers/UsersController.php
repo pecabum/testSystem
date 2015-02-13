@@ -14,18 +14,28 @@ class UsersController extends \BaseController {
     // User login
     public function login() {
         $data = Input::all();
-        $validator = Validator::make($data,
-                        array(
-                            'name' => 'required|min:4',
-                            'fakNom' => 'required|min:8'
-                        ));
+        $validator = Validator::make($data, array(
+                    'name' => 'required|min:4',
+                    'fakNom' => 'required|min:8'
+        ));
 
-        
-        
+
+
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         } else {
-            return View::make('users.login_student_failed');
+            $user = User::where('fak_nom', '=', Input::get('fakNom'))->first();
+            if (is_null($user)) {
+                $usr = new User;
+                $usr->username = Input::get('name');
+                $usr->fak_nom = Input::get('fakNom');
+
+                if ($usr->save()) {
+                    return View::make('users.index')->withUser($usr);
+                }
+            } else {
+                return View::make('users.login_student_failed');
+            }
         }
     }
 

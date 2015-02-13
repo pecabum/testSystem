@@ -42,19 +42,19 @@
                 <div class="grid_7">
                     <a href="{{ URL::to('questions/create')}}" class="dashboard-module">
                         <img src="{{ URL::to('images/Crystal_Clear_write.gif')}}" width="64" height="64" alt="edit" />
-                        <span>New article</span>
+                        <span>Нов въпрос</span>
                     </a>
 
 
-                    <a href="" class="dashboard-module">
+                    <a href="{{ URL::to('cms/questions')}}" class="dashboard-module">
                         <img src="{{ URL::to('images/Crystal_Clear_files.gif')}}" width="64" height="64" alt="edit" />
-                        <span>Articles</span>
+                        <span>Въпроси</span>
                     </a>
 
 
-                    <a href="" class="dashboard-module">
+                    <a href="{{ URL::to('cms/students')}}" class="dashboard-module">
                         <img src="{{ URL::to('images/Crystal_Clear_stats.gif')}}" width="64" height="64" alt="edit" />
-                        <span>Stats</span>
+                        <span>Студенти</span>
                     </a>
 
                     <div style="clear: both"></div>

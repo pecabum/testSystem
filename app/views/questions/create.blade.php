@@ -29,7 +29,7 @@
 
 {{ Form::open(['url' =>  'questions',  'class'=>'form-style', 'method' => 'post']) }}
 
-<input type="text" class="input-field-style-question" id="p_scnt" size="20" name="question" value="a" placeholder="Въведи въпрос" />
+<input type="text" class="input-field-style-question" id="p_scnt" size="20" name="question" value="" placeholder="Въведи въпрос" />
 
 <div id="p_scents">
     <p>

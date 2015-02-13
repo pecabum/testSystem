@@ -1,20 +1,11 @@
 @extends('default')
 
 @section('content')
-    <h1>
-        All users
-    </h1>
+
+<script data-main="../../public/js/main" src="{{URL::to("js/libs/require.js") }}"></script>
 
 
-    @if($users->count()) 
-        @foreach ($users as $user) 
+<input type="hidden" id="qwerty" value="{{$user->id}}"/>
+<div id="testDiv"/>
 
-        <li> {{ link_to("/users/$user->username",$user->username) }}</li>
-        @endforeach
-    
-    @else
-        
-    <p>Unfortunately, there are no users</p>
-    
-    @endif
 @stop

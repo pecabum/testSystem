@@ -7,9 +7,13 @@ class QuestionController extends \BaseController {
      *
      * @return Response
      */
+    
+    public $questionCount = 20;
+    
+    
     public function index() {
        
-        $questions = Question::select('id','question')->orderByRaw("RAND()")->take(10)->get();
+        $questions = Question::select('id','question')->orderByRaw("RAND()")->take($this->questionCount)->get();
     
         foreach ($questions as $question) {
             $answers = Answer::select('id','question_id','answer')->where('question_id','=',$question->id)->get();
@@ -22,11 +26,17 @@ class QuestionController extends \BaseController {
     
     public function complete($userId) {
 
-        $answersArray = Request::get('answersArray');
-        
+        $answers = Input::get('answersArray');//get('answersArray');
+
+        $answersArray = explode(',', $answers); 
+//        var_dump($answersArray);exit;        
         $count = Answer::select('id','question_id')->whereIn('id',$answersArray)->where('is_correct','=',1)->count();
         
-        return Response::json(array("correctAnswers"=>$count)); 
+        $user = User::find(intval($userId));
+        $user->points = $count;
+        $user->save();
+        
+        return View::make('questions.test_result')->withCorrect($count)->withCount($this->questionCount); 
     }
     
     public function show($id) {

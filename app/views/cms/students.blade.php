@@ -24,17 +24,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                    
+                        @foreach ($users as $key=>$user)
 
                         <tr>
-                            <td class="align-center">1</td>
-                            <td><a href="">Don Quixote</a></td>
-                            <td>12345678</td>
-                            <td>20</td>
+                            <td class="align-center">{{$key + 1}}</td>
+                            <td><a href="">{{ $user['username'] }}</a></td>
+                            <td>{{ $user['fak_nom'] }}</td>
+                            <td>{{$user['points']}}</td>
                             <td>
                                 <a href=""><img src="{{ URL::to('images/cross-on-white.gif')}}" width="26" height="26" alt="delete" /></a>
                             </td>
                         </tr> 
-
+                        @endforeach
                     </tbody>
                 </table>
             </form>

@@ -4,15 +4,12 @@
 @section('content')
 
 	<link rel="stylesheet" href="../piechart/demo/style.css"/>		
-		<!--Пешо, тук трябва да подадеш параметри. $correct_answers, $question_count. 
-			Виж дали правилно сме ги използвали по коментарите -->
 		<center>
 		    <h1 style='font-size: 38px;'> Резултати от теста</h1>
 		</center>
 	
-		<span class="chart" data-percent="45">
 		<!--МАХНИ горния ред и ОТКОМЕНТИРАЙ долния ред (даже може да го оправиш, ако е грешно) -->
-		<!--<span class="chart" data-percent="{{$correct_answers/$question_count*100}}">-->
+		<span class="chart" data-percent="{{$correct/$count*100}}">
 			<span class="percent"></span>
 			</span>
 
@@ -38,9 +35,7 @@
 			</script>
 		</span>
 		
-		<!--Тук също се използват същите параметри-->
-		<font style="padding-left:2.5em"> Верни отговори: 9/20</font>
-		<!--<font> Верни отговори: {{$correct_answers}}/{{$question_count}}</font>-->
+		<font> Верни отговори: {{$correct}}/{{$count}}</font>
 
 		
 @stop

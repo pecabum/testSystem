@@ -37,6 +37,5 @@ Route::post('users/login','UsersController@login');
 // MODERATORS ROUTES
 Route::get('cms','ModeratorController@index');
 Route::post('cms/login','ModeratorController@login');
-
-
-
+Route::get('cms/questions','ModeratorController@getAllQuestions');
+Route::get('cms/students','ModeratorController@getAllStudents');
