@@ -8,21 +8,30 @@ class QuestionController extends \BaseController {
      * @return Response
      */
     public function index() {
-
-        $users = User::all();
-
-        return View::make('users.index')->withUsers($users);
+       
+        $questions = Question::select('id','question')->orderByRaw("RAND()")->take(10)->get();
+    
+        foreach ($questions as $question) {
+            $answers = Answer::select('id','question_id','answer')->where('question_id','=',$question->id)->get();
+            $question['answers'] = $answers;            
+        }
+        
+        echo $questions;
     }
 
-    /*
-     * Show information about the user
-     */
+    
+    public function complete($userId) {
 
-    public function show($username) {
+        $answersArray = Request::get('answersArray');
+        
+        $count = Answer::select('id','question_id')->whereIn('id',$answersArray)->where('is_correct','=',1)->count();
+        
+        return Response::json(array("correctAnswers"=>$count)); 
+    }
+    
+    public function show($id) {
 
-        $user = User::whereUsername($username)->first();
 
-        return View::make('users.show')->withUser($user);
     }
 
     /**
@@ -40,17 +49,15 @@ class QuestionController extends \BaseController {
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }
-       
-//        echo '<pre>';
-//        var_dump($data);exit;
-            
+        
         $question = new Question;
 
         $question->question = $data['question'];
+        
         if($question->save()) {
             foreach ($data['answers'] as $key => $arrayAnswer) { 
-                $answer = new Answer;
                 
+                $answer = new Answer;
                 $answer->answer = $arrayAnswer;
                 $answer->question_id = $question->id;
                 

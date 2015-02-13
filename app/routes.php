@@ -11,26 +11,32 @@
   |
  */
 
-//
+//Main route    
 Route::get('/', "HomeController@showWelcome");
 
+// QUESTIONS ROUTES
+Route::get('questions','QuestionController@index');
+Route::get('questions/create',[
+    'uses'=>'QuestionController@create',    
+    'as'=>'questions.create'
+]);
+
+Route::post('questions','QuestionController@store');
+
+Route::post('questions/{userId}','QuestionController@complete');
 
 
-Route::resource('questions','QuestionController');
-//Route::get('users/{username}', 'UserController@show');
+// USERS ROUTES
+//Route::resource('users','UsersController');
+Route::get('users','UsersController@index');
 
-//Route::get('users', function() {
-//
-//    $users = User::all();
-//
-//    return View::make('users.index')->withUsers($users);
-//    
-//});
+Route::post('users/login','UsersController@login');
 
-//Route::get('users/{username}', function($username) {
-//
-//    $user = User::whereUsername($username)->first();
-//
-//    return View::make('users.show')->withUser($user);
-//    
-//});
+
+
+// MODERATORS ROUTES
+Route::get('cms','ModeratorController@index');
+Route::post('cms/login','ModeratorController@login');
+
+
+
