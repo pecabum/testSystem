@@ -31,7 +31,7 @@ define([], function() {
     
     var getBaseURL = function() {
         "use strict";
-        return location.protocol + "//" + location.hostname +  (location.port && ":" + location.port) + "/laraPro/public/";
+        return location.protocol + "//" + location.hostname +  (location.port && ":" + location.port) + "/laraPro/public/api";
     };
 
     return {

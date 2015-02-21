@@ -38,7 +38,8 @@ class QuestionController extends \BaseController {
         
         return View::make('questions.test_result')->withCorrect($count)->withCount($this->questionCount); 
     }
-    
+ 
+
     public function show($id) {
 
 
